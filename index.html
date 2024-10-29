@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Tracker - Upload PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .return-button {
+            display: none;
+        }
+        .logo{
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform:translateX(-50%);
+            height:60px;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='Original1.png') }}" alt="Logo" class="logo">
+
+    <div class="container">
+        <h1>Upload Your Bank Statement (PDF)</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="application/pdf" required>
+            <button type="submit">Upload</button>
+        </form>
+        <!-- Return to Home button (hidden by default) -->
+        <div id="return-section" class="return-button">
+            <h2>Data from PDF saved!</h2>
+            <button onclick="window.location.href='/'">Return to Home</button>
+        </div>
+    </div>
+
+    <!-- Script to show return button after file upload -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('uploaded') === 'true') {
+                document.getElementById('return-section').style.display = 'block';
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>
